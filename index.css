@@ -27,10 +27,11 @@ body {
 }
 
 .picker {
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     min-height: 80vh;
 }
 
@@ -49,4 +50,17 @@ body {
     background-color:#3bedb7;
     color: black;
     cursor: pointer;
+}
+
+@media (max-width: 500px) {
+    .header {
+        min-height: 160px;
+    }
+    .picker {
+        max-width: 300px;
+        min-height: 60vh;
+    }
+    .picker_question {
+        text-align: center;
+    }
 }
