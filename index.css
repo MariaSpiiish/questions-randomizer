@@ -59,6 +59,7 @@ body {
     .picker {
         max-width: 300px;
         min-height: 60vh;
+        margin: 0 auto;
     }
     .picker_question {
         text-align: center;
