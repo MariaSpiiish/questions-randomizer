@@ -44,3 +44,6 @@ button.addEventListener('click', () => {
         localStorage.setItem('questions', JSON.stringify(questions));
     }
 })
+
+const date = new Date().getFullYear();
+document.getElementById('year').textContent = date;
