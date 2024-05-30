@@ -25,7 +25,7 @@ function getRandomValue(max) {
 
 const button = document.getElementById('button');
 
-button.addEventListener('click', () => {
+function handleClick() {
     const questions = JSON.parse(localStorage.getItem('questions'));
 
     if (!questions) {
@@ -43,7 +43,23 @@ button.addEventListener('click', () => {
 
         localStorage.setItem('questions', JSON.stringify(questions));
     }
-})
+}
+
+function handleTouchStart() {
+    button.style.backgroundColor = '#3bedb7';
+}
+
+function handleTouchEnd() {
+    setTimeout(() => {
+        button.style.backgroundColor = '#135CFD';
+        button.style.color = '#dbebf8';
+    }, 200);
+}
+
+button.addEventListener('click', handleClick);
+button.addEventListener('touchstart', handleTouchStart);
+button.addEventListener('touchend', handleTouchEnd);
+button.addEventListener('touchcancel', handleTouchEnd);
 
 const date = new Date().getFullYear();
 document.getElementById('year').textContent = date;

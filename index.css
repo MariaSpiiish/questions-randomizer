@@ -48,9 +48,10 @@ body {
     border-radius: 7px;
     width: 180px;
     height: 48px;
-    color: #fff;
+    color: #dbebf8;
     font-weight: 700;
     font-size: 18px;
+    transition: background-color 0.3s ease;
 }
 
 .picker__button:hover {
