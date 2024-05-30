@@ -80,6 +80,16 @@ body {
     font-weight: 700;
 }
 
+.footer__link {
+    text-decoration: none;
+    color:#dbebf8
+}
+
+.footer__link:hover {
+    cursor: pointer;
+}
+
+
 @media (max-width: 500px) {
     .header {
         min-height: 160px;
