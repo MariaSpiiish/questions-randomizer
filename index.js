@@ -1,7 +1,8 @@
+const button = document.getElementById('button');
+
 // Fetch the JSON file if there is no localStorage named 'questions'
-if (!localStorage.getItem('questions')) {
-    console.log('fetching')
-    fetch('questions.json')
+function getQuestions(url) {
+    fetch(url)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
@@ -18,20 +19,25 @@ if (!localStorage.getItem('questions')) {
         });
 }
 
+if (!localStorage.getItem('questions')) {
+    console.log('fetching');
+    getQuestions('questions.json');
+}
+
 function getRandomValue(max) {
     const randomValue = Math.floor(Math.random() * max);
     return randomValue;
 }
-
-const button = document.getElementById('button');
 
 function handleClick() {
     const questions = JSON.parse(localStorage.getItem('questions'));
 
     if (!questions) {
         document.getElementById('question').innerText = 'No questions found, try clicking the button again or reloading the page';
-    } else if(Object.keys(questions).length === 0) {
-        document.getElementById('question').innerText = 'You have answered all the questions. Load more.';
+    } else if (Object.keys(questions).length === 1) {
+        button.innerHTML = 'Load questions';
+        document.getElementById('question').innerText = questions[0];
+        localStorage.removeItem('questions');
     } else {
         const numberOfQuestions = Object.keys(questions).length;
         const questionNumber = getRandomValue(numberOfQuestions);
@@ -45,6 +51,10 @@ function handleClick() {
     }
 }
 
+function handleFetching() {
+    getQuestions('questions.json');
+}
+
 function handleTouchStart() {
     button.style.backgroundColor = '#3bedb7';
 }
@@ -56,7 +66,14 @@ function handleTouchEnd() {
     }, 200);
 }
 
-button.addEventListener('click', handleClick);
+button.addEventListener('click', () => {
+    if (!localStorage.getItem('questions')) {
+        handleFetching()
+        button.innerHTML = 'Next question'
+    } else {
+        handleClick()
+    }
+});
 button.addEventListener('touchstart', handleTouchStart);
 button.addEventListener('touchend', handleTouchEnd);
 button.addEventListener('touchcancel', handleTouchEnd);
