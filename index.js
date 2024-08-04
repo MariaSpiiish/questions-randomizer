@@ -19,7 +19,7 @@ function getQuestions(url) {
         });
 }
 
-if (!localStorage.getItem('questions')) {
+if (!localStorage.getItem('questions') || Object.keys(JSON.parse(localStorage.getItem('questions'))).length == 0) {
     console.log('fetching');
     getQuestions('questions.json');
 }
